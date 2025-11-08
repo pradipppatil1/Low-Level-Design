@@ -1,5 +1,3 @@
-import java.*;
-
 public class Client {
 
     public static void main(String[] args) {
@@ -13,7 +11,7 @@ public class Client {
         
         // Student student = studentBuilder.build();
 
-        Student student = Student.getStudentBuilder()
+        Student student = Student.StudentBuilder()
                         .setName("Pradip")
                         .setAge(25)
                         .setAddress("123 Main St")
@@ -21,5 +19,7 @@ public class Client {
                         .setPsp(99)
                         .setGradeYear(2020)
                         .build();
+
+        System.out.println("DEBUG1234");
     }
 }

@@ -1,5 +1,3 @@
-import java.util.*;
-
 public class Student {
     private String name;
     private int age;
@@ -17,13 +15,13 @@ public class Student {
         this.gradeYear = builder.gradeYear;
     }
 
-    public static StudentBuilder getStudentBuilder() {
+    public static StudentBuilder StudentBuilder() {
         return new StudentBuilder();
-        
     }
+    
 // Internal class StudentBuilder
     
-    static class StudentBuilder {
+    public static class StudentBuilder {
 
         private String name;
         private int age;
