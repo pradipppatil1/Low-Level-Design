@@ -42,5 +42,26 @@ a simplified version where prototypes are registered once in a central place (re
 - How your class/ code should be structured
 - How class should intract with another class
 
+## Adapter Design Pattern
+1) what is Adapter?
+- Something which convert one form to another.
+2) It acts as a bridge between two incompatible interfaces.
+3) The Adapter Pattern allows incompatible classes to work together by converting the interface of one class into another interface that a client expects
+4) Adapter pattern ensure that our codebase remain maintainable when we are talking to incompatible interface or 3rd parties api
+
+- Detailed implementation is inside /designPatterns/adapter/ folder 
+
+### How to use Adapter
+- Define an interface
+- Implementation of an interface in Adapter class
+
 # Behavioural Design Patterns
 - How to write behaviour
+- How to implement actions/ methods in our code base
+
+## Stratergy Design Pattern
+- When we have multiple way to implement method/action.
+- When you want to switch logic at runtime without using lots of if-else statements.
+- It allows you to change the behavior (algorithm) of a class without changing its code.
+
+- Detailed implementation is inside /designPatterns/strategy/ folder 
