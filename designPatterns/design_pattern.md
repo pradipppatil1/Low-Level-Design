@@ -70,3 +70,67 @@ a simplified version where prototypes are registered once in a central place (re
 - It allows you to change the behavior (algorithm) of a class without changing its code.
 
 - Detailed implementation is inside /designPatterns/strategy/ folder 
+
+## Observer Design Pattern
+
+
+###  What is Observer Pattern?
+
+The **Observer Pattern** defines a one-to-many dependency between objects —  
+when **one object (Producer/Subject)** changes its state, all its **dependents (Subscribers/Observers)** are automatically notified.
+
+It’s like a **YouTube Channel (Producer)** notifying all its **Subscribers (Observers)** when a new video is uploaded.
+
+---
+
+###  Basic Idea
+
+- **Producer (Subject / Observable)** → owns the event and manages subscribers.  
+- **Subscriber (Observer)** → subscribes to get notified when an event occurs.
+
+When the producer updates something, it calls its event/notify method, and all subscribers receive the update.
+
+---
+
+###  Key Roles
+
+| Role | Responsibility |
+|------|----------------|
+| **Producer / Subject** | Maintains list of subscribers and triggers notifications. |
+| **Subscriber / Observer** | Registers to producer and reacts when notified. |
+| **notify() method** | Owned by the producer — calls each subscriber’s update method. |
+
+---
+
+###  Simple Example (in plain English)
+
+- The **Weather Station** (Producer) tracks temperature.  
+- The **Mobile App** and **Website** (Subscribers) want updates.  
+- When temperature changes, Weather Station **notifies** both automatically.
+
+---
+
+###  Sequence of Steps
+
+1. Subscriber calls `subscribe()` on the producer.  
+2. Producer stores that subscriber in a list.  
+3. When an event occurs, producer calls its `notify()` method.  
+4. Each subscriber’s `update()` method runs in response.
+
+---
+
+###  UML Sequence Diagram
+
+```mermaid
+sequenceDiagram
+    participant P as Producer (Subject)
+    participant S1 as Subscriber 1 (Observer)
+    participant S2 as Subscriber 2 (Observer)
+
+    S1->>P: subscribe()
+    S2->>P: subscribe()
+    Note right of P: Stores subscribers in list
+
+    P->>P: event occurs (data change)
+    P->>S1: notify() → update()
+    P->>S2: notify() → update()

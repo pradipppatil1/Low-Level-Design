@@ -33,3 +33,58 @@
     - **Login** *extends* **Login via Google*
     - **Login** *extends* **Login via Email*
     - **Login** *extends* **Login via Instagram*
+
+![Schedule Interview UML](uml-diagram.png)
+
+## Class Diagram
+- Structural UML
+- Represent diffent entitties of codebase like
+
+    i) class
+
+    ii) interface
+
+    iii) Abstract class
+
+    iv) enum
+
+    ### and relationship btw these entities
+
+    i) inheritance
+
+    ii) implementing interface
+
+    iii) one class has another class as attribute 
+
+- Class Representation
+
+![Class UML](notation_class.jpg)
+
+- Interface Representation have << {interface_name}  >>
+- Note that static attributes and method will have underline
+- Abstract class exactly same like class just class name is in italic
+- enum represented as comma separated values in box
+
+### How to represent relationship between entities
+1) **Inheritance** - Is-A, like Dog Is A Animal(class/interface)
+2) **Association**  
+    A general relationship between two independent classes.  
+    **Example:** `Teacher ↔ Student` — both exist separately.
+
+    **Aggregation (◻︎ or ◇)**  
+    A weak whole–part relationship. The part can exist independently of the whole.  
+    **Example:** `Department ◇ Professor` — professors can exist if the department is removed.
+
+    **Composition (◆)**  
+    A strong whole–part relationship. The part’s life is tied to the whole. If the whole is destroyed, so are the parts.  
+    **Example:** `House ◆ Room` — rooms don’t exist without the house.
+
+    ---
+
+    **Quick table**
+
+    | Type | Symbol | Lifetime |
+    |---:|:---:|:---|
+    | Association | — / ↔ | Independent |
+    | Aggregation | ◇ | Part independent |
+    | Composition | ◆ | Part dependent |
