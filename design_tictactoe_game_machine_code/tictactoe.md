@@ -10,7 +10,7 @@
 
 ---
 
-##  How to approach Schema Design (ELI5)
+##  How to approach Schema Design 
 Think of the database like LEGO blocks — you decide how pieces (tables) connect.
 
 ###  Relationship types
@@ -58,7 +58,7 @@ Start with models, then services, then controllers.
 Questions to finalize:
 - Board size? (N x N — default 3x3 but keep N configurable)
 - Number of players? (Usually 2)
-- Bot required? (Yes/No — PDF says: **Yes**, only 1 bot per game)
+- Bot required? (Yes/No —  **Yes**, only 1 bot per game)
 - Bot difficulty levels? (Easy / Medium / Hard)
 - Player symbols? (Each player picks a unique symbol — no duplicates)
 - Who moves first? (Randomize player order at start)
