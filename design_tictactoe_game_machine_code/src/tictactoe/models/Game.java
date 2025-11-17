@@ -68,6 +68,30 @@ public class Game {
         return new Builder();
     }
 
+    public void displayBoard() {
+        this.board.display();
+    }
+
+    public void makeNextMove() {
+        // first get player to make move
+        Player currentPlayer = players.get(currentPlayerIndex);
+        System.out.println("Player "+currentPlayer.getSymbol()+" is playing");
+        Move currentMove = currentPlayer.decideMove(board);
+        // validate move logic added in player class decideMove method
+        int row = currentMove.getCell().getRow();
+        int col = currentMove.getCell().getCol();
+
+        board.getCells().get(row).get(col).setState(CellState.FILLED);
+        board.getCells().get(row).get(col).setPlayer(currentPlayer);
+
+        moves.add(currentMove);
+    }
+
+    private boolean validateMove(Move currentMove) {
+        return currentMove.getCell().getState().equals(CellState.EMPTY);
+
+    }
+
     public static class Builder {
         private Board board;
         private List<Player> players;
@@ -82,7 +106,18 @@ public class Game {
             return this;
         }
 
+        public void validate() {
+            if(this.board == null || this.board.getSize() < 3) {
+                throw new IllegalArgumentException("Board or board size is less than 3");
+            }
+            if(this.players == null || this.players.isEmpty() || this.players.size() != this.board.getSize() -1) {
+                throw new IllegalArgumentException("Players are empty");
+            }
+        }
+
         public Game build() {
+            //validation
+            validate();
             Game game = new Game();
             game.setBoard(board);
             game.setPlayers(players);

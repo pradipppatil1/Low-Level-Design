@@ -43,5 +43,18 @@ public class Board {
     public List<List<Cell>> getCells() {
         return cells;
     }
-    
+
+    public void display() {
+        for(int i = 0; i < size; i++) {
+            for(int j = 0; j < size; j++) {
+                if(cells.get(i).get(j).getState().equals(CellState.EMPTY))
+                {
+                    System.out.printf("|  |");
+                }else {
+                    System.out.printf("| "+cells.get(i).get(j).getPlayer().getSymbol()+" |");
+                }
+            }
+            System.out.println();
+        }
+    }
 }
