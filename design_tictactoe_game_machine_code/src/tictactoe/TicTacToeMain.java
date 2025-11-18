@@ -41,7 +41,9 @@ public class TicTacToeMain {
             players.add(new Bot("Bot", 'B', GameDiffculty.EASY));
         }
 
-        Game game = gameController.createGame(boardSize, players);
+        String winningStratergy = "orderOne";
+
+        Game game = gameController.createGame(boardSize, players, winningStratergy);
 
         // we need to check game status constantly
         // once game status is not IN_PROGRESS get our of loop
@@ -50,9 +52,12 @@ public class TicTacToeMain {
             System.out.println("This is current board!");
             gameController.getCurrentGame(game);
             gameController.executeMove(game);
+        }
+        System.out.println("Games has ended Result is: ");
 
-
-
+        if(!gameController.getGameState(game).equals(GameState.DRAW)) {
+            System.out.println("Winner is : " +gameController.getWinner(game).getName());
+            gameController.displayBoard(game);
         }
 
     }

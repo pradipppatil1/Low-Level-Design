@@ -9,10 +9,11 @@ import java.util.List;
 
 public class GameController {
     // GameController implementation
-   public Game createGame(int size, List<Player> players) {
-       Game game = Game.startGame().
-               setBoard(new Board(size))
+   public Game createGame(int size, List<Player> players, String winningStratergy) {
+       Game game = Game.startGame()
+               .setSize(size)
                .setPlayers(players)
+               .setGameWinningStratergies(winningStratergy)
                .build();
        return game;
    }
@@ -27,5 +28,13 @@ public class GameController {
 
     public void executeMove(Game game) {
        game.makeNextMove();
+    }
+    // get winner from game
+    public Player getWinner(Game game) {
+       return game.getWinner();
+    }
+    // displayBoard from game
+    public void displayBoard(Game game) {
+        game.displayBoard();
     }
 }

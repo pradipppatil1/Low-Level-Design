@@ -1,5 +1,8 @@
 package tictactoe.models;
 
+import tictactoe.factories.GameWinningStratergyFactory;
+import tictactoe.stratergies.gameWinningStratergies.GameWinningStratergies;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +13,8 @@ public class Game {
     private Player winner;
     private int currentPlayerIndex;
     private List<Move> moves;
+
+    private GameWinningStratergies gameWinningStratergies;
 
     private Game()
     {
@@ -68,14 +73,18 @@ public class Game {
         return new Builder();
     }
 
-    public void displayBoard() {
+    public void     displayBoard() {
         this.board.display();
+    }
+
+    public void setGameWinningStratergies(GameWinningStratergies gameWinningStratergies) {
+        this.gameWinningStratergies = gameWinningStratergies;
     }
 
     public void makeNextMove() {
         // first get player to make move
         Player currentPlayer = players.get(currentPlayerIndex);
-        System.out.println("Player "+currentPlayer.getSymbol()+" is playing");
+        System.out.println("Player "+currentPlayer.getName()+" is playing");
         Move currentMove = currentPlayer.decideMove(board);
         // validate move logic added in player class decideMove method
         int row = currentMove.getCell().getRow();
@@ -85,6 +94,13 @@ public class Game {
         board.getCells().get(row).get(col).setPlayer(currentPlayer);
 
         moves.add(currentMove);
+        // check winner
+        if(this.gameWinningStratergies.checkWinner(board, currentPlayer,currentMove.getCell())) {
+            gameState = GameState.ENDED;
+            winner = currentPlayer;
+        }
+        currentPlayerIndex += 1;
+        currentPlayerIndex %= players.size();
     }
 
     private boolean validateMove(Move currentMove) {
@@ -93,11 +109,13 @@ public class Game {
     }
 
     public static class Builder {
-        private Board board;
+        private int size;
         private List<Player> players;
 
-        public Builder setBoard(Board board) {
-            this.board = board;
+        private GameWinningStratergies gameWinningStratergies;
+
+        public Builder setSize(int size) {
+            this.size = size;
             return this;
         }
 
@@ -106,11 +124,18 @@ public class Game {
             return this;
         }
 
+        // use factory design pattern to set diffrent winning stratergies at runtime
+
+        public Builder setGameWinningStratergies(String winningStratergies) {
+            this.gameWinningStratergies = GameWinningStratergyFactory.getGameWinningStratergies(winningStratergies,size);
+            return this;
+        }
+
         public void validate() {
-            if(this.board == null || this.board.getSize() < 3) {
+            if(this.size < 3) {
                 throw new IllegalArgumentException("Board or board size is less than 3");
             }
-            if(this.players == null || this.players.isEmpty() || this.players.size() != this.board.getSize() -1) {
+            if(this.players == null || this.players.isEmpty() || this.players.size() != this.size - 1) {
                 throw new IllegalArgumentException("Players are empty");
             }
         }
@@ -119,11 +144,12 @@ public class Game {
             //validation
             validate();
             Game game = new Game();
-            game.setBoard(board);
-            game.setPlayers(players);
             game.setGameState(GameState.IN_PROGRESS);
             game.setMoves(new ArrayList<>());
             game.setCurrentPlayerIndex(0);
+            game.setPlayers(players);
+            game.setBoard(new Board(size));
+            game.setGameWinningStratergies(gameWinningStratergies);
             return game;
 
         }
