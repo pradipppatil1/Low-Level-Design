@@ -99,6 +99,19 @@ public class Game {
             gameState = GameState.ENDED;
             winner = currentPlayer;
         }
+        boolean isBoardEmpty = false;
+        for (int i=0; i < board.getSize(); i++) {
+            for (int j=0; j < board.getSize(); j++) {
+                if(board.getCells().get(i).get(j).getState() == CellState.EMPTY) {
+                    isBoardEmpty = true;
+                    break;
+                }
+            }
+        }
+        if(!isBoardEmpty) {
+            gameState = GameState.DRAW;
+        }
+
         currentPlayerIndex += 1;
         currentPlayerIndex %= players.size();
     }

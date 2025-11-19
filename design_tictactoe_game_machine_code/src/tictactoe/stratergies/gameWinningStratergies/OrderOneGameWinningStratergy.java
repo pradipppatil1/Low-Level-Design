@@ -47,10 +47,10 @@ public class OrderOneGameWinningStratergy implements GameWinningStratergies {
         rowPlayerCount.get(row).put(symbol, rowPlayerCount.get(row).get(symbol) + 1);
 
         // Now based on move made update values for symbol in List of HashMap for column
-        if(!columnPlayerCount.get(row).containsKey(symbol)){
-            columnPlayerCount.get(row).put(symbol, 0);
+        if(!columnPlayerCount.get(column).containsKey(symbol)){
+            columnPlayerCount.get(column).put(symbol, 0);
         }
-        columnPlayerCount.get(row).put(symbol, columnPlayerCount.get(row).get(symbol) + 1);
+        columnPlayerCount.get(column).put(symbol, columnPlayerCount.get(column).get(symbol) + 1);
 
         // update leftdiagonal based on move, use helper methods
         if(isLeftTopDiagonal(row, column)){
@@ -70,7 +70,7 @@ public class OrderOneGameWinningStratergy implements GameWinningStratergies {
 
         // Lets check if Player win or not
         if(rowPlayerCount.get(row).get(symbol) == size ||
-                columnPlayerCount.get(row).get(symbol) == size ){
+                columnPlayerCount.get(column).get(symbol) == size ){
             return true;
         }
 
